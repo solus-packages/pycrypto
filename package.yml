@@ -1,6 +1,6 @@
 name       : pycrypto
 version    : 2.6.1
-release    : 1
+release    : 2
 source     :
     - https://pypi.python.org/packages/60/db/645aa9af249f059cc3a368b118de33889219e0362141e75d4eaf6f80f163/pycrypto-2.6.1.tar.gz : f2ce1e989b272cfcb677616763e0a2e7ec659effa67a88aa92b3a65528f60a3c
 license    : Public Domain
@@ -12,9 +12,14 @@ builddeps  :
     - pkgconfig(python-3.5)
     - pkgconfig(python-2.7)
     - python-setuptools
+setup      : |
+    %patch -p1 < $pkgfiles/security/cve-2013-7459.patch
 build      : |
     %python_setup
     %python3_setup
 install    : |
     %python_install
     %python3_install
+check      : |
+    python setup.py test
+    python3 setup.py test
