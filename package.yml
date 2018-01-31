@@ -21,11 +21,9 @@ install    : |
     %python3_install
 check      : |
     pushd $PKG_BUILD_DIR/py2build
-        #PYTHONPATH=$PWD py.test
         python setup.py test
     popd
 
     pushd $PKG_BUILD_DIR/py3build
-        #PYTHONPATH=$PWD py.test3
         python3 setup.py test
     popd
