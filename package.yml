@@ -1,16 +1,15 @@
 name       : pycrypto
 version    : 2.6.1
-release    : 2
+release    : 3
 source     :
     - https://pypi.python.org/packages/60/db/645aa9af249f059cc3a368b118de33889219e0362141e75d4eaf6f80f163/pycrypto-2.6.1.tar.gz : f2ce1e989b272cfcb677616763e0a2e7ec659effa67a88aa92b3a65528f60a3c
-license    : Public Domain
+license    : Public-Domain
 component  : programming.python
-summary    : Cryptographic modules for Python.
+summary    : Cryptographic modules for Python
 description: |
     Cryptographic modules for Python.
 builddeps  :
-    - pkgconfig(python-3.5)
-    - pkgconfig(python-2.7)
+    - pkgconfig(python3)
     - python-setuptools
 setup      : |
     %patch -p1 < $pkgfiles/security/cve-2013-7459.patch
@@ -21,5 +20,12 @@ install    : |
     %python_install
     %python3_install
 check      : |
-    python setup.py test
-    python3 setup.py test
+    pushd $PKG_BUILD_DIR/py2build
+        #PYTHONPATH=$PWD py.test
+        python setup.py test
+    popd
+
+    pushd $PKG_BUILD_DIR/py3build
+        #PYTHONPATH=$PWD py.test3
+        python3 setup.py test
+    popd
